@@ -90,7 +90,9 @@ public class Booking {
             WebElement ciudad = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@data-filters-group=\"class\"]//div[@data-filters-item=\"class:class=3\"]//div[@data-testid=\"filters-group-label-content\"]/div)[1]")));
             driver.findElement(By.xpath("//div[@data-filters-item=\"di:di=7583\"]//div[@data-testid=\"filters-group-label-content\"]")).click();
 
-
+            WebElement imprimir = driver.findElement(By.xpath("(//div[@id=\"filter_group_ht_id_:rm:\"]//div[@data-testid=\"filters-group-label-content\"])[2]"));
+            System.out.println(imprimir.getText());
+            imprimir.click();
     }
     @Then("the results are displayed")
     public void the_results_are_displayed() {
@@ -100,8 +102,8 @@ public class Booking {
     public void the_first_option_is_opened() throws InterruptedException {
        driver.findElement (By.xpath("(//a[@data-testid=\"title-link\"])[1]" )).click();
        Thread.sleep(5000);
-       driver.close();
-       driver.quit();
+     //  driver.close();
+      //driver.quit();
 
     }
 }
