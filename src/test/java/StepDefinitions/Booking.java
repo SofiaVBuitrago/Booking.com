@@ -2,6 +2,7 @@ package StepDefinitions;
 
 import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -70,7 +71,25 @@ public class Booking {
 
     }
     @When("the places are displayed the user marks the five stars and chapinero filters")
-    public void the_places_are_displayed_the_user_marks_the_stars_and_chapinero_filters() {
+    public void the_places_are_displayed_the_user_marks_the_stars_and_chapinero_filters() throws InterruptedException {
+
+
+            WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+            System.out.println("va a validar titulo");
+            wait.until(ExpectedConditions.titleContains("Hotels in Bogotá"));
+            System.out.println("hace la espera");
+            driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+            WebElement fiveStars = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@data-filters-group=\"class\"]//div[@data-filters-item=\"class:class=3\"]//div[@data-testid=\"filters-group-label-content\"]/div)[1]")));
+            System.out.println("hizo la espera");
+            // fiveStars.click();
+            driver.findElement(By.xpath("(//div[@data-filters-group=\"class\"]//div[@data-filters-item=\"class:class=5\"]//div[@data-testid=\"filters-group-label-content\"]/div)[1]")).click();
+
+
+            wait.until(ExpectedConditions.titleContains("Hotels in Bogotá"));
+            driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+            WebElement ciudad = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@data-filters-group=\"class\"]//div[@data-filters-item=\"class:class=3\"]//div[@data-testid=\"filters-group-label-content\"]/div)[1]")));
+            driver.findElement(By.xpath("//div[@data-filters-item=\"di:di=7583\"]//div[@data-testid=\"filters-group-label-content\"]")).click();
+
 
     }
     @Then("the results are displayed")
@@ -78,7 +97,11 @@ public class Booking {
 
     }
     @And("the first option is opened")
-    public void the_first_option_is_opened() {
+    public void the_first_option_is_opened() throws InterruptedException {
+       driver.findElement (By.xpath("(//a[@data-testid=\"title-link\"])[1]" )).click();
+       Thread.sleep(5000);
+       driver.close();
+       driver.quit();
 
     }
 }
